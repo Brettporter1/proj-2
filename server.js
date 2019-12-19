@@ -1,3 +1,4 @@
+
 const express = require('express');
 const app = express();
 const passport = require('passport')
@@ -25,7 +26,9 @@ app.get('/', function (req, res) {
 
 });
 
-
+require("./routes/apiRoutes")(app);
+const htmlRoutes = require('./app/routes/htmlRoutes');
+app.use(htmlRoutes);
 //Models
 const models = require("./app/models/");
 
