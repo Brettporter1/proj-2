@@ -7,10 +7,17 @@ const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
 require('dotenv').config();
 
+app.set('views', './app/views')
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main'
+}));
+app.set('view engine', '.handlebars');
+
 //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(express.static("app/public"));
 // For Passport
 
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret
@@ -19,20 +26,15 @@ app.use(passport.initialize());
 
 app.use(passport.session()); // persistent login sessions
 
-
-app.get('/', function (req, res) {
-
-  res.send('Welcome to Passport with Sequelize');
-
-});
-
-require("./routes/apiRoutes")(app);
 const htmlRoutes = require('./app/routes/htmlRoutes');
 app.use(htmlRoutes);
+
+require("./app/routes/apiRoutes")(app);
+
 //Models
 const models = require("./app/models/");
 
-const authRoute = require('./app/routes/auth.js')(app);
+require('./app/routes/auth.js')(app);
 
 
 //Sync Database
@@ -52,10 +54,6 @@ models.sequelize.sync({ force: true }).then(function () {
 });
 
 //For Handlebars
-app.set('views', './app/views')
-app.engine('handlebars', exphbs({
-  defaultLayout: 'main'
-}));
-app.set('view engine', '.handlebars');
 
 
+module.exports = app;
