@@ -1,47 +1,58 @@
-require("dotenv").config();
-var express = require("express");
-var exphbs = require("express-handlebars");
+const express = require('express');
+const app = express();
+const passport = require('passport')
+const session = require('express-session')
+const bodyParser = require('body-parser')
+const exphbs = require('express-handlebars')
+require('dotenv').config();
 
-var db = require("./models");
+//For BodyParser
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-var app = express();
-var PORT = process.env.PORT || 3000;
+// For Passport
 
-// Middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
-app.use(express.static("public"));
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret
 
-// Handlebars
-app.engine(
-  "handlebars",
-  exphbs({
-    defaultLayout: "main"
-  })
-);
-app.set("view engine", "handlebars");
+app.use(passport.initialize());
 
-// Routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+app.use(passport.session()); // persistent login sessions
 
-var syncOptions = { force: false };
 
-// If running a test, set syncOptions.force to true
-// clearing the `testdb`
-if (process.env.NODE_ENV === "test") {
-  syncOptions.force = true;
-}
+app.get('/', function (req, res) {
 
-// Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function() {
-  app.listen(PORT, function() {
-    console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
-  });
+  res.send('Welcome to Passport with Sequelize');
+
 });
 
-module.exports = app;
+
+//Models
+const models = require("./app/models/");
+
+const authRoute = require('./app/routes/auth.js')(app);
+
+
+//Sync Database
+models.sequelize.sync({ force: true }).then(function () {
+  app.listen(5000, function (err) {
+    if (!err)
+      console.log("Site is live");
+    else console.log(err)
+
+  });
+  console.log('Nice! Database looks fine')
+
+}).catch(function (err) {
+
+  console.log(err, "Something went wrong with the Database Update!")
+
+});
+
+//For Handlebars
+app.set('views', './app/views')
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main'
+}));
+app.set('view engine', '.handlebars');
+
+
