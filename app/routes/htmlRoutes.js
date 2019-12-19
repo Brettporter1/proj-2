@@ -11,11 +11,11 @@ const router = express.Router();
   });
 
   router.get('/login', (req, res) => {
-    res.render(path.join(__dirname,'..','login'));
+    res.render('login');
   })
 
   router.get('/register', (req, res) => {
-    res.render(path.join(__dirname,'..','register'));
+    res.render('register');
   })
 
 module.exports = router
