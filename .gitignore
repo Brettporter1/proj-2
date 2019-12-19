@@ -103,8 +103,12 @@ dist
 # TernJS port file
 .tern-port
 
+
 initial-index.html
 
 initial-login.html
 
 initial-register.html
+
+config/config.json
+
