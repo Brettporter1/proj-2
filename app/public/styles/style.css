@@ -11404,6 +11404,7 @@ video {
 *:focus,
 *:active{
   outline:none;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body{
