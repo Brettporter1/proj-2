@@ -1,0 +1,29 @@
+<main class="container w-full h-full relative flex flex-col justify-center">
+        <!-- logo image  -->
+        <div class="flex justify-center self-center mt-4 rounded-full">
+            <img class="w-1/2" src="./images/DUI-droplet.svg" alt="dui">
+        </div>
+        <!-- main content -->
+        <div class="w-full h-2/3 bg-gray-200 flex flex-col items-center justify-center">
+            <form class="flex flex-wrap items-center text-gray-700 w-5/6 justify-between mt-0">
+                <label for="name" class="dui-blue text-xl text-center w-full font-bold mt-4">NAME</label>
+                <input class="dui-input text-center" data-id="name" value="" type="text" placeholder="John Smith">
+                <label for="height" class="dui-blue text-xl w=1/4 text-left font-bold mt-6">HEIGHT</label>
+                <input class="rounded-full w-2/3 py-2 px-4 mt-6 text-center short-input" data-id="height" id="height" value="">
+                <label for="weight" class="dui-blue text-xl w=1/4 text-left font-bold mt-6">WEIGHT</label>
+                <input class="rounded-full w-2/3 py-2 px-4 mt-6 text-center short-input" data-id="weight" id="weight" value="">
+                <label for="gender" class="dui-blue text-xl w=1/4 text-left font-bold mt-6">GENDER</label>
+                <select class="rounded-full w-2/3 py-2 px-4 text-center mt-6 short-input" data-id="gender" id="gender" value="">
+                    <option>Male</option>
+                    <option>Female</option>
+                </select>
+                <label for="email" class="dui-blue text-xl w-full text-center font-bold mt-4">EMAIL</label>
+                <input class="dui-input text-center" data-id="email" value="" type="text" placeholder="JohnSmith@mail.com">
+                <label for="password" class="dui-blue text-xl w-full text-center font-bold mt-4">PASSWORD</label>
+                <input class="dui-input text-center" data-id="password" value="" type="password" placeholder="***********">
+                <label for="pass-confirm" class="dui-blue text-xl w-full text-center font-bold mt-4">CONFIRM PASSWORD</label>
+                <input class="dui-input text-center" data-id="pass-confirm" value="" type="password" placeholder="***********">
+                <button class="btn-lg w-full mt-12 py-4 px-6 font-bold" type="submit" id="login">GET STARTED</button>
+            </form>
+        </div>
+    </main>

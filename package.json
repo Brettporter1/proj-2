@@ -4,6 +4,7 @@
   "description": "Project 2 Starter",
   "main": "server.js",
   "scripts": {
+    "build:css":"tailwind build src/style.css -o public/styles/style.css",
     "start": "node server.js",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
@@ -15,7 +16,8 @@
     "express": "^4.17.0",
     "express-handlebars": "^3.1.0",
     "mysql2": "^1.6.5",
-    "sequelize": "^5.8.6"
+    "sequelize": "^5.8.6",
+    "tailwindcss": "^1.1.4"
   },
   "devDependencies": {
     "chai": "^4.2.0",

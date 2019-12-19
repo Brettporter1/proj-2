@@ -1,0 +1,52 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+*:focus,
+*:active{
+    outline:none;
+}
+
+body{
+    @apply bg-gray-200;
+}
+
+.grey-split{
+    /* -webkit-clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+    clip-path: polygon(0 10%, 100% 0%, 100% 100%, 0 100%); */
+    z-index: 1;
+    height: 70vh;
+    top:15%;
+}
+
+.main-logo {
+    top: 15%;
+    width: 50%;
+    height:50vw;
+    border:8px solid #44A6A6;
+}
+
+.dui-blue{
+    color:#44A6A6;
+}
+
+.btn-lg {
+    background-color:#44A6A6;
+    color:#fff;
+    @apply rounded-full;
+    background: #44A6A6;
+    border: 1px solid #44A6A6;
+    box-shadow: 0 8px 31px 0 rgba(154,154,154,0.50);
+    border-radius: 38px;
+}
+
+.dui-input {
+    border:2px solid #44A6A6;
+    @apply p-3 pl-6 w-full rounded-full;
+}
+
+.short-input{
+    border:2px solid #44A6A6;
+}

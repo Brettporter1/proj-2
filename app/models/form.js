@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Form = sequelize.define("Form", {
+  let Form = sequelize.define("Form", {
     hours: {
       type: DataTypes.INTEGER,
       allowNull: false,
