@@ -1,4 +1,5 @@
-var db = require("../models");
+// var db = require("../models");
+const path = require('path')
 
 const express = require('express');
 const router = express.Router();
@@ -10,11 +11,11 @@ const router = express.Router();
   });
 
   router.get('/login', (req, res) => {
-    res.render('login');
+    res.render(path.join(__dirname,'..','login'));
   })
 
   router.get('/register', (req, res) => {
-    res.render('register');
+    res.render(path.join(__dirname,'..','register'));
   })
 
 module.exports = router

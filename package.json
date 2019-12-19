@@ -4,7 +4,7 @@
   "description": "Project 2 Starter",
   "main": "server.js",
   "scripts": {
-    "build:css":"tailwind build src/style.css -o public/styles/style.css",
+    "build:css": "tailwind build src/style.css -o public/styles/style.css",
     "start": "node server.js",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
