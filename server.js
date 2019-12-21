@@ -27,21 +27,30 @@ app.use(passport.initialize());
 
 app.use(passport.session()); // persistent login sessions
 
+//Models
+const models = require("./app/models/");
+
+// Routes
+
 // connect to html routes to render pages
+
 const htmlRoutes = require('./app/routes/htmlRoutes');
 app.use(htmlRoutes);
 
 const apiRoutes = require("./app/routes/apiRoutes");
 app.use(apiRoutes);
 
-//Models
-const models = require("./app/models/");
+require('./app/routes/auth.js')(app,passport);
 
-require('./app/routes/auth.js')(app);
+
+//load passport strategies
+ 
+require('./app/config/passport/passport.js')(passport, models.user);
 
 
 //Sync Database
-models.sequelize.sync({}).then(function () {
+
+models.sequelize.sync({ }).then(function () {
   app.listen(5000, function (err) {
     if (!err)
       console.log("Site is live");
