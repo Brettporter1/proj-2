@@ -1,11 +1,12 @@
 
 const express = require('express');
-const app = express();
 const passport = require('passport')
 const session = require('express-session')
 const bodyParser = require('body-parser')
 const exphbs = require('express-handlebars')
 require('dotenv').config();
+
+const app = express();
 
 app.set('views', './app/views')
 app.engine('handlebars', exphbs({
@@ -26,16 +27,18 @@ app.use(passport.initialize());
 
 app.use(passport.session()); // persistent login sessions
 
-
 //Models
 const models = require("./app/models/");
 
 // Routes
 
+// connect to html routes to render pages
+
 const htmlRoutes = require('./app/routes/htmlRoutes');
 app.use(htmlRoutes);
 
-require("./app/routes/apiRoutes")(app);
+const apiRoutes = require("./app/routes/apiRoutes");
+app.use(apiRoutes);
 
 require('./app/routes/auth.js')(app,passport);
 

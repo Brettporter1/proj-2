@@ -16,6 +16,10 @@ const router = express.Router();
 
   router.get('/register', (req, res) => {
     res.render('register');
+  });
+
+  router.get('/amidrunk', (req, res) => {
+    res.render('am-i-drunk')
   })
 
 module.exports = router
