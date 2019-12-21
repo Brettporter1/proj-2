@@ -41,7 +41,7 @@ require('./app/routes/auth.js')(app);
 
 
 //Sync Database
-models.sequelize.sync({ force: true }).then(function () {
+models.sequelize.sync({}).then(function () {
   app.listen(5000, function (err) {
     if (!err)
       console.log("Site is live");

@@ -1,56 +1,62 @@
 
-module.exports = function(sequelize, Sequelize) {
- 
-  const User = sequelize.define('user', {
+module.exports = function (sequelize, Sequelize) {
 
-      id: {
-          autoIncrement: true,
-          primaryKey: true,
-          type: Sequelize.INTEGER
-      },
+    const User = sequelize.define("User", {
+        id: {
+            type: Sequelize.INTEGER,
+            autoIncrement: true,
+            primaryKey: true
+        },
+        name: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                // length must be at least 1
+                len: [1]
+            }
+        },
+        email: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isEmail: true
+            }
+        },
+        password: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            // minimum length of 6
+            len: [6]
+        },
+        weight: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            // weight max 550, min 80
+            validate: {
+                isInt: true,
+                min: 80,
+                max: 550
+            }
+        },
+        height: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            validate: {
+                isInt: true
+            }
+        },
+        // storing gender as integer for array selection, value = integer
+        gender: {
+            type: Sequelize.STRING,
+            allowNull: false
+        }
+    });
 
-      firstname: {
-          type: Sequelize.STRING,
-          notEmpty: true
-      },
-
-      lastname: {
-          type: Sequelize.STRING,
-          notEmpty: true
-      },
-
-      username: {
-          type: Sequelize.TEXT
-      },
-
-      about: {
-          type: Sequelize.TEXT
-      },
-
-      email: {
-          type: Sequelize.STRING,
-          validate: {
-              isEmail: true
-          }
-      },
-
-      password: {
-          type: Sequelize.STRING,
-          allowNull: false
-      },
-
-      last_login: {
-          type: Sequelize.DATE
-      },
-
-      status: {
-          type: Sequelize.ENUM('active', 'inactive'),
-          defaultValue: 'active'
-      }
-
-
-  });
-
-  return User;
+    User.associate = function (models) {
+        User.hasMany(models.Form, {
+            onDelete: "cascade"
+        });
+    };
+    return User;
 
 }

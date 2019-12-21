@@ -9,25 +9,26 @@
     </div>
     <!-- main content -->
     <div class="w-full grey-split h-2/3 bg-gray-200 flex items-center flex-col">
-        <form class="flex flex-col items-center text-gray-700 w-5/6 justify-center mt-24">
+        <form action="/api/amidrunk" method="POST"
+        class="flex flex-col items-center text-gray-700 w-5/6 justify-center mt-24">
             <label for="name" class="dui-blue text-xl text-center w-full font-bold mt-4">TYPE</label>
-            <input class="dui-input" data-id="type" value="" type="text" list="types" placeholder="Vodka">
+            <input class="dui-input" name="type" value="" type="text" list="types" placeholder="Vodka">
             <datalist id="types" class="text-gray-300">
                 <option value="Vodka">
                 <option value="Whiskey">
             </datalist>
 
             <label for="email" class="dui-blue text-xl w-full text-center font-bold mt-4">ALCOHOL PERCENTAGE</label>
-            <input class="dui-input" data-id="alc-percentage" value="" type="text" placeholder="43%">
+            <input class="dui-input" name="alc_percentage" value="" type="text" placeholder="43 (percent)">
 
             <label for="password" class="dui-blue text-xl w-full text-center font-bold mt-4">QUANTITY</label>
-            <input class="dui-input" data-id="quantity" value="" type="text" placeholder="2 oz">
+            <input class="dui-input" name="quantity" value="" type="text" placeholder="2 (oz)">
 
             <button type="submit" id="add-drink" class="btn-lg px-4 py-4 w-3/4 mt-6">ADD DRINK</button>
         </form>
         <form class="flex flex-col items-center text-gray-700 w-5/6 justify-center">
             <label for="password" class="dui-blue text-xl w-full text-center font-bold mt-4">HOURS DRINKING</label>
-            <input class="dui-input" data-id="hours" value="" type="text" placeholder="3.25">
+            <input class="dui-input" name="hours" value="" type="text" placeholder="3.25">
 
             <button type="submit" id="drunkness" class="btn-lg px-4 py-4 w-3/4 mt-6 mb-6">AM I DRUNK</button>
         </form>
