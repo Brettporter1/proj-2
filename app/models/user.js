@@ -7,15 +7,23 @@ module.exports = function (sequelize, Sequelize) {
             autoIncrement: true,
             primaryKey: true
         },
-        name: {
+        firstname: {
             type: Sequelize.STRING,
-            allowNull: false,
+            allowNull: true,
             validate: {
                 // length must be at least 1
                 len: [1]
             }
         },
-        email: {
+        lastname: {
+            type: Sequelize.STRING,
+            allowNull: true,
+            validate: {
+                // length must be at least 1
+                len: [1]
+            }
+        },
+         email: {
             type: Sequelize.STRING,
             allowNull: false,
             validate: {
@@ -28,29 +36,30 @@ module.exports = function (sequelize, Sequelize) {
             // minimum length of 6
             len: [6]
         },
-        weight: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            // weight max 550, min 80
-            validate: {
-                isInt: true,
-                min: 80,
-                max: 550
-            }
-        },
-        height: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            validate: {
-                isInt: true
-            }
-        },
-        // storing gender as integer for array selection, value = integer
-        gender: {
-            type: Sequelize.STRING,
-            allowNull: false
-        }
     });
+    //     weight: {
+    //         type: Sequelize.INTEGER,
+    //         allowNull: false,
+    //         // weight max 550, min 80
+    //         validate: {
+    //             isInt: true,
+    //             min: 80,
+    //             max: 550
+    //         }
+    //     },
+    //     height: {
+    //         type: Sequelize.INTEGER,
+    //         allowNull: false,
+    //         validate: {
+    //             isInt: true
+    //         }
+    //     },
+    //     // storing gender as integer for array selection, value = integer
+    //     gender: {
+    //         type: Sequelize.STRING,
+    //         allowNull: false
+    //     }
+    // });
 
     User.associate = function (models) {
         User.hasMany(models.Form, {
