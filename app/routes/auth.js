@@ -17,7 +17,30 @@ module.exports = function(app, passport) {
  
     ));
 
-    app.get('/amidrunk',authController.amidrunk);
+    app.get('/amidrunk', isLoggedIn, authController.amidrunk);
+
+    app.get('/logout',authController.logout);
+
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect: '/amidrunk',
+
+        failureRedirect: '/login'
+    }
+
+    ));
+
+    function isLoggedIn(req, res, next) {
+ 
+        if (req.isAuthenticated())
+         
+            return next();
+             
+        res.redirect('/login');
+     
+    }
+
+
+
 
 
 

@@ -17,3 +17,13 @@ exports.amidrunk = function(req, res) {
     res.render('am-i-drunk');
  
 }
+
+exports.logout = function(req, res) {
+ 
+    req.session.destroy(function(err) {
+ 
+        res.redirect('/login');
+ 
+    });
+ 
+}
