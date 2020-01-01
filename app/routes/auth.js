@@ -1,4 +1,5 @@
-var authController = require('../controllers/authcontroller.js');
+const authController = require('../controllers/authcontroller.js');
+const passport = require('passport')
  
  
 module.exports = function(app, passport) {
@@ -8,26 +9,16 @@ module.exports = function(app, passport) {
  
     app.get('/login', authController.login);
  
- 
-    app.post('/register', passport.authenticate('local-register', {
-            successRedirect: '/amidrunk',
- 
-            failureRedirect: '/register'
-        }
- 
-    ));
-
     app.get('/amidrunk', isLoggedIn, authController.amidrunk);
 
     app.get('/logout',authController.logout);
 
-    app.post('/login', passport.authenticate('local-login', {
-        successRedirect: '/amidrunk',
+//     // app.post('/login', passport.authenticate('local-login', {
+//     //     successRedirect: '/amidrunk',
 
-        failureRedirect: '/login'
-    }
-
-    ));
+//     //     failureRedirect: '/login'
+//     // }
+//     // ));
 
     function isLoggedIn(req, res, next) {
  
