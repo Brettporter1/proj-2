@@ -5,7 +5,7 @@
     </div>
     <!-- main content -->
     <div class="w-full h-2/3 bg-gray-200 flex flex-col items-center justify-center">
-        <form action="/api/users" method="POST"
+        <form action="/register" method="POST"
             class="flex flex-wrap items-center text-gray-700 w-5/6 justify-between mt-0">
             <label for="name" class="dui-blue text-xl text-center w-full font-bold mt-4">NAME</label>
             <input class="dui-input" name="name" type="text" placeholder="John Smith">
@@ -17,8 +17,7 @@
             <input class="rounded-full w-2/3 py-2 px-4 mt-6 short-input" name="weight" id="weight">
 
             <label for="gender" class="dui-blue text-xl w=1/4 text-left font-bold mt-6">GENDER</label>
-            <select class="rounded-full w-2/3 py-2 px-4 text-center mt-6 short-input" name="gender" id="gender"
-                value="">
+            <select class="rounded-full w-2/3 py-2 px-4 text-center mt-6 short-input" name="gender" id="gender">
                 <option class="text-center" value="Male">Male</option>
                 <option class="text-center" value="Female">Female</option>
             </select>
@@ -26,9 +25,9 @@
             <input class="dui-input" name="email" value="" type="text" placeholder="JohnSmith@mail.com">
             <label for="password" class="dui-blue text-xl w-full text-center font-bold mt-4">PASSWORD</label>
             <input class="dui-input" name="password" value="" type="password" placeholder="***********">
-            <label for="pass-confirm" class="dui-blue text-xl w-full text-center font-bold mt-4">CONFIRM
+            <label for="password2" class="dui-blue text-xl w-full text-center font-bold mt-4">CONFIRM
                 PASSWORD</label>
-            <input class="dui-input" name="pass-confirm" value="" type="password" placeholder="***********">
+            <input class="dui-input" name="password2" value="" type="password" placeholder="***********">
             <button class="btn-lg w-full mt-12 py-4 px-6 font-bold" type="submit" id="login">GET STARTED</button>
         </form>
     </div>

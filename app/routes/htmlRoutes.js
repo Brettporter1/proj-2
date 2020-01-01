@@ -18,8 +18,7 @@ const router = express.Router();
     res.render('register');
   });
 
-  router.get('/amidrunk', (req, res) => {
-    res.render('am-i-drunk')
-  })
-
+    router.get('/amidrunk', (req,res) => {
+      res.render('am-i-drunk');
+    })
 module.exports = router

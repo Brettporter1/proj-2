@@ -10,8 +10,12 @@
     /* font-family: 'Montserrat', sans-serif!important; */
 }
 
+
 body{
     @apply bg-gray-200;
+    max-width:550px;
+    margin:0px auto;
+    height: 100%;
 }
 
 .grey-split{
@@ -23,9 +27,9 @@ body{
 }
 
 .main-logo {
-    top: 15%;
-    width: 50%;
-    height:50vw;
+    top: 24%;
+    width: 180px;
+    height:180px;
     border:8px solid #44A6A6;
     box-shadow: 0 8px 31px 0 rgba(154,154,154,0.50);
 }
@@ -55,4 +59,10 @@ body{
 
 .short-input{
     border:2px solid #44A6A6;
+}
+
+@media only screen and (max-width:500px){
+    .main-logo{
+        top:15%;
+    }
 }
