@@ -1,16 +1,12 @@
 const LocalStrategy = require('passport-local').Strategy;
-const Sequelize = require('sequelize');
-const path = require('path');
 const bCrypt = require('bcryptjs');
-const env = process.env.NODE_ENV || "development";
-const config = require(path.join(__dirname, '..', 'config.json'))[env];
-let sequelize = new Sequelize(config.database, config.username, config.password, config);
-const User = require('../../models/User')(sequelize, Sequelize);
+
+const { User } = require('../../models');
 
 module.exports = function(passport) {
-  console.log('I am here')
-  passport.use( 'local-login',
-    new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+  console.log('this ran first');
+  passport.use(
+    new LocalStrategy({ usernameField: 'email'}, (email, password, done) => {
       
       User.findOne({ 
         where:{email: email} 
@@ -21,10 +17,11 @@ module.exports = function(passport) {
           }
 
           bCrypt.compare(password, user.password, (err, isMatch) => {
-            console.log(password, user.password);
+            
             if (err) throw err;
 
             if(isMatch){
+              console.log(user.dataValues);
               return done(null, user);
             } else {
               return done(null, false, { message:'Password incorrect' })
@@ -34,14 +31,27 @@ module.exports = function(passport) {
         .catch(err => console.log(err));
     })
   )
-  
-  passport.serializeUser((user, done) => {
-    done(null, user.id);
-  });
 
-  passport.deserializeUser((id, done) => {
-    User.findById(id, (err, user) => {
-      done(err,user);
-    })
-  })
+  passport.serializeUser((user, done) => {
+    console.log('serializing user: ', user.id);
+    done(null, user.id);
+    });
+
+    passport.deserializeUser((id, done) => {
+    User.findByPk(id).then((user) => {
+    done(null, user);
+    }).catch(done);
+    });
+  
+  // passport.serializeUser((user, done) => {
+  //   done(null, user.id);
+  // });
+
+  // passport.deserializeUser((id, done) => {
+  //   console.log(id)
+  //   User.findByPk(id, (err, user) => {
+  //     console.log(id)
+  //     done(err,user);
+  //   })
+  // })
 }
