@@ -1,13 +1,8 @@
 const db = require("../models/index");
-const path = require('path');
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
-const Sequelize = require('sequelize');
-const env = process.env.NODE_ENV || "development";
-const config = require(path.join(__dirname, '..', 'config', 'config.json'))[env];
-let sequelize = new Sequelize(config.database, config.username, config.password, config);
-const User = require('../models/User')(sequelize, Sequelize);
+const { User } = require('../models');
 const passport = require('passport');
 
 // Get all users
@@ -18,7 +13,7 @@ router.get("/api/users", function (req, res) {
 });
 
 // Post new user form
-router.post("/register", function (req, res) {
+router.post("/register", (req, res) => {
   const {name, email, weight, height, gender, password, password2} = req.body;
   let errors = [];
 
@@ -95,11 +90,18 @@ router.post("/register", function (req, res) {
 });
 
 router.post('/login', (req, res, next) => {
-  passport.authenticate('local-login', {
+  console.log('trying to login');
+  passport.authenticate('local', {
     successRedirect:'/amidrunk',
     failerRedirect:'/login',
   })(req, res, next);
+  console.log('made it here')
 });
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/login');
+})
 
 router.get("/api/amidrunk", function (req, res) {
   db.Form.findAll({}).then(function (data) {

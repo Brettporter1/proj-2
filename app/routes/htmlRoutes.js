@@ -1,9 +1,7 @@
-// var db = require("../models");
-const path = require('path')
 
 const express = require('express');
 const router = express.Router();
-
+const { ensureAuthenticated } = require('../config/auth')
 
   // Load index page
   router.get('/', (req, res) => {
@@ -18,7 +16,8 @@ const router = express.Router();
     res.render('register');
   });
 
-    router.get('/amidrunk', (req,res) => {
+  router.get('/amidrunk', ensureAuthenticated, (req,res) => {
+      console.log('Almost there');
       res.render('am-i-drunk');
     })
 module.exports = router
