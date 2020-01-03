@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs')
 const { User } = require('../models');
+const { Form } = require('../models')
 const passport = require('passport');
 
 // Get all users
@@ -103,16 +104,25 @@ router.get('/logout', (req, res) => {
   res.redirect('/login');
 })
 
-router.get("/api/amidrunk", function (req, res) {
-  db.Form.findAll({}).then(function (data) {
-    res.json(data);
+router.get("/amidrunk", function (req, res) {
+  console.log(`my request: ${req.body}`)
+  Form.findAll({}).then(drinkData => {
+    res.render('am-i-drunk', {drink: drinkData});
   });
 });
 
-router.post("/api/amidrunk", function (req, res) {
-  db.Form.create(req.body).then(function (data) {
-    res.json(data);
-  });
+router.post("/amidrunk", (req, res) => {  
+  console.log(req.body)
+  let {quantity, alc_percentage, type} = req.body;
+  let UserId = req.session.passport.user;
+  Form.create({
+    quantity,
+    alc_percentage,
+    type,
+    UserId
+  }).then(drinkData => {
+    console.log(`this is the drink data: ${drinkData}`)
+    res.json({drink: drinkData});
+  }); 
 });
-
 module.exports = router;

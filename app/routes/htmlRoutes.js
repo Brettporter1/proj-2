@@ -17,7 +17,6 @@ const { ensureAuthenticated } = require('../config/auth')
   });
 
   router.get('/amidrunk', ensureAuthenticated, (req,res) => {
-      console.log('Almost there');
       res.render('am-i-drunk');
     })
 module.exports = router
