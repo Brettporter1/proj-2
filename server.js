@@ -1,47 +1,68 @@
-require("dotenv").config();
-var express = require("express");
-var exphbs = require("express-handlebars");
 
-var db = require("./models");
+const express = require('express');
+const exphbs = require('express-handlebars');
+const passport = require('passport');
+const flash = require('connect-flash');
+const session = require('express-session');
 
-var app = express();
-var PORT = process.env.PORT || 3000;
+require('dotenv').config();
+const app = express();
 
-// Middleware
-app.use(express.urlencoded({ extended: false }));
+
+// app.use(bodyParser.json());
+app.use(express.static("./app/public"));
+
+//load passport strategies
+require('./app/config/passport/passport')(passport);
+
+// For Handlebars
+app.set('views', './app/views')
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main'
+}));
+app.set('view engine', '.handlebars');
+
+//Models
+const models = require("./app/models/");
+
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
 
-// Handlebars
-app.engine(
-  "handlebars",
-  exphbs({
-    defaultLayout: "main"
-  })
-);
-app.set("view engine", "handlebars");
+// Express Session
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie:{maxAge:21600000} })); // session secret
 
-// Routes
-require("./routes/apiRoutes")(app);
-require("./routes/htmlRoutes")(app);
+// For Passport
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
-var syncOptions = { force: false };
+// Connect Flash
+app.use(flash());
 
-// If running a test, set syncOptions.force to true
-// clearing the `testdb`
-if (process.env.NODE_ENV === "test") {
-  syncOptions.force = true;
-}
 
-// Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function() {
-  app.listen(PORT, function() {
-    console.log(
-      "==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.",
-      PORT,
-      PORT
-    );
+// connect to html routes to render pages
+
+const htmlRoutes = require('./app/routes/htmlRoutes');
+app.use(htmlRoutes);
+
+const apiRoutes = require("./app/routes/apiRoutes");
+app.use(apiRoutes);
+
+//Sync Database
+const PORT = process.env.PORT || 5000;
+
+models.sequelize.sync({  }).then(function () {
+  app.listen(PORT, err => {
+    if (!err)
+      console.log("Site is live");
+    else console.log(err)
+
   });
+  console.log('Nice! Database looks fine')
+
+}).catch(function (err) {
+
+  console.log(err, "Something went wrong with the Database Update!")
+
 });
 
 module.exports = app;
