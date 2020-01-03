@@ -23,6 +23,10 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.STRING,
       allowNull: false
     },
+    hours: {
+      type: Sequelize.INTEGER,
+      allowNull: false
+    },
     UserId:{
       type: Sequelize.INTEGER,
       allowNull: true,
