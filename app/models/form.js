@@ -23,14 +23,19 @@ module.exports = function (sequelize, Sequelize) {
       type: Sequelize.STRING,
       allowNull: false
     },
+    UserId:{
+      type: Sequelize.INTEGER,
+      allowNull: true,
+      foreignKey: true
+    }
   });
 
-  Form.associate = function (models) {
-    Form.belongsTo(models.User, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
+  // Form.associate = models => {
+  //   Form.belongsTo(models.User, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
   return Form;
 };

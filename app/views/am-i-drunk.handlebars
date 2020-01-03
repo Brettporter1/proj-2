@@ -5,11 +5,11 @@
     </div>
     <!-- logo image  -->
     <div class="absolute flex justify-center items-center self-center rounded-full bg-white z-10 main-logo">
-        <h1 id="alc-content" class="text-6xl font-bold dui-orange">{{ alcLevel }}</h1>
+        <h1 id="alc-content" class="text-6xl font-bold dui-orange">{{alcLevel}}</h1>
     </div>
     <!-- main content -->
     <div class="w-full grey-split h-2/3 bg-gray-200 flex items-center flex-col">
-        <form action="/api/amidrunk" method="POST"
+        <form action="/amidrunk" method="POST"
         class="flex flex-col items-center text-gray-700 w-5/6 justify-center mt-24">
             <label for="name" class="dui-blue text-xl text-center w-full font-bold mt-4">TYPE</label>
             <input class="dui-input" name="type" value="" type="text" list="types" placeholder="Vodka">
@@ -26,11 +26,16 @@
 
             <button type="submit" id="add-drink" class="btn-lg px-4 py-4 w-3/4 mt-6">ADD DRINK</button>
         </form>
+        {{#each drink}}
+        <p>{{type}}{{alc_percentage}}</p>
+        {{/each}}
         <form class="flex flex-col items-center text-gray-700 w-5/6 justify-center">
             <label for="password" class="dui-blue text-xl w-full text-center font-bold mt-4">HOURS DRINKING</label>
             <input class="dui-input" name="hours" value="" type="text" placeholder="3.25">
 
             <button type="submit" id="drunkness" class="btn-lg px-4 py-4 w-3/4 mt-6 mb-6">AM I DRUNK</button>
         </form>
+        <p class="m-auto w-full text-center mt-6">Are you finished?</p>
+            <button onclick="window.location.href = '/login';" class="btn-lg mt-2 py-2 px-6 m-auto font-bold">LOGOUT</button>
     </div>
 </main>
