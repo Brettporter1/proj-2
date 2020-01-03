@@ -1,4 +1,5 @@
 
+
 // create obj with methods for all api req
 const Alc = {
   addAlc: (type, name, percentage) => {
