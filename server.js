@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Express Session
-app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie:{maxAge:21600000} })); // session secret
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true, cookie: { maxAge: 21600000 } })); // session secret
 
 // For Passport
 app.use(passport.initialize());
@@ -50,7 +50,7 @@ app.use(apiRoutes);
 //Sync Database
 const PORT = process.env.PORT || 5000;
 
-models.sequelize.sync({  }).then(function () {
+models.sequelize.sync({ force: true }).then(function () {
   app.listen(PORT, err => {
     if (!err)
       console.log("Site is live");
