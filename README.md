@@ -13,3 +13,4 @@ Application that calculates your BAC (Blood Alcohol Content)
 #### Node/Express
 #### MySQL/Sequelize
 #### Express Handlebars
+#### Tailwind CSS
