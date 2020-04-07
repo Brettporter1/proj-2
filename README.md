@@ -2,10 +2,7 @@
 
 Application that calculates your BAC (Blood Alcohol Content) 
 
-[Try for yourself](https://proj-two-yo.herokuapp.com/login)
-
-###### User Email: *test@gmail.com*
-###### User Password: *123456*
+[Try for yourself](https://proj-two-yo.herokuapp.com/register)
 
 ***
 
